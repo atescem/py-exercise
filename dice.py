@@ -1,20 +1,20 @@
 import random
 
-zar1 = random.randint(1,6)
-zar2 = random.randint(1,6)
+dice1 = random.randint(1,6)
+dice2 = random.randint(1,6)
 
 user1 = int(input("1. Kullanıcı tahmini: "))
 user2 = int(input("2. Kullanıcı tahmini: "))
 
-toplam = zar1 + zar2
+total = dice1 + dice2
 
-fark1 = toplam - user1
-fark2 = toplam - user2
+odds1 = total - user1
+odds2 = total - user2
 
-if fark1 > fark2:
+if odds1 > odds2:
     print("Kullanıcı 1 Kazandı")
 
-elif fark2 > fark1:
+elif odds2 > odds1:
     print("Kullanıcı 2 Kazandı")
 
 else:
