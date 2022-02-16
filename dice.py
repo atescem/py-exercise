@@ -1,4 +1,6 @@
 import random
+import sqlite3
+
 
 name1 = str(input("1. Kullanıcı, adınızı giriniz: "))
 name2 = str(input("2. Kullanıcı, adınızı giriniz: "))
@@ -22,7 +24,7 @@ while key == 1:
         print("Kazanan: " + name1)
 
     elif odds2 > odds1:
-        print("Kazanan" + name2)
+        print("Kazanan: " + name2)
 
     else:
         print("Kazanan Yok")
