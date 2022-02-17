@@ -19,13 +19,13 @@ while key == 1:
 
     odds1 = total - guess1
     odds2 = total - guess2
+    winner = "null"
 
-
-    if odds1 > odds2:
+    if odds1 < odds2:
         print("Kazanan: " + name1)
         winner = name1
 
-    elif odds2 > odds1:
+    elif odds2 < odds1:
         print("Kazanan: " + name2)
         winner = name2
 
@@ -38,7 +38,7 @@ try:
     cursor = sqliteConnection.cursor()
     print("Successfully Connected to Database")
 
-    sqlite_insert_query = """INSERT INTO data_main(name1, name2, dice1, dice2, guess1, guess2, winner) VALUES (?, ?, ?, ?, ?, ?, ?),"""(name1,name2,dice1,dice2,guess1,guess2,winner);
+    sqlite_insert_query = "INSERT INTO data_main(name1, name2, dice1, dice2, guess1, guess2, winner) VALUES ('"+name1+"','"+name2+"','"+str(dice1)+"','"+str(dice2)+"','"+str(guess1)+"','"+str(guess2)+"','"+winner+"');"
 
     count = cursor.executescript(sqlite_insert_query)
     sqliteConnection.commit()
