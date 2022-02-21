@@ -1,7 +1,17 @@
 import random
 import sqlite3
 
-def tryf():
+#birinci function bir db ismi alıp db yi bağlantı atıcak ve vursor döndürecek.
+#ikinci function bir cursor alıcak parametreleri alıcak ve insterleyecek.
+
+def connectf():
+    sqliteConnection = sqlite3.connect('dicedb.db')
+    cursor = sqliteConnection.cursor()
+    print("Successfully Connected to Database")
+
+def insertf(name1,name2,dice1,dice2,guess1,guess2,winner):
+    sqlite_insert_query = "INSERT INTO data_main(name1, name2, dice1, dice2, guess1, guess2, winner) VALUES ('"+name1+"','"+name2+"','"+str(dice1)+"','"+str(dice2)+"','"+str(guess1)+"','"+str(guess2)+"','"+winner+"');"
+
     try:
         sqliteConnection = sqlite3.connect('dicedb.db')
         cursor = sqliteConnection.cursor()
@@ -15,16 +25,14 @@ def tryf():
         cursor.close()
     except sqlite3.Error as error:
         print("Failed to insert data into sqlite table", error)
-def finalf():
-    if sqliteConnection:
-        sqliteConnection.close()
-        print("The SQLite connection is closed")    
-
-
+    finally:
+        if sqliteConnection:
+            sqliteConnection.close()
+            print("The SQLite connection is closed") 
 
 name1 = str(input("1. Kullanıcı, adınızı giriniz: "))
 name2 = str(input("2. Kullanıcı, adınızı giriniz: "))
-
+connectf()
 key = 1
 while key == 1:
 
@@ -51,9 +59,8 @@ while key == 1:
     else:
         print("Kazanan Yok")
         key = 0
-        
-    tryf()
 
-#birinci function bir db ismi alıp db yi bağlantı atıcak ve vursor döndürecek .
-#ikinci function bir cursor alıcak parametreleri alıcak ve insterleyecek.
-   
+    insertf(name1,name2,dice1,dice2,guess1,guess2,winner)
+
+
+#The End
