@@ -1,6 +1,25 @@
 import random
 import sqlite3
 
+def tryf():
+    try:
+        sqliteConnection = sqlite3.connect('dicedb.db')
+        cursor = sqliteConnection.cursor()
+        print("Successfully Connected to Database")
+
+        sqlite_insert_query = "INSERT INTO data_main(name1, name2, dice1, dice2, guess1, guess2, winner) VALUES ('"+name1+"','"+name2+"','"+str(dice1)+"','"+str(dice2)+"','"+str(guess1)+"','"+str(guess2)+"','"+winner+"');"
+
+        count = cursor.executescript(sqlite_insert_query)
+        sqliteConnection.commit()
+        print("Record inserted successfully into data_main table ", cursor.rowcount)
+        cursor.close()
+    except sqlite3.Error as error:
+        print("Failed to insert data into sqlite table", error)
+def finalf():
+    if sqliteConnection:
+        sqliteConnection.close()
+        print("The SQLite connection is closed")    
+
 
 
 name1 = str(input("1. Kullanıcı, adınızı giriniz: "))
@@ -32,22 +51,9 @@ while key == 1:
     else:
         print("Kazanan Yok")
         key = 0
+        
+    tryf()
 
-try:
-    sqliteConnection = sqlite3.connect('dicedb.db')
-    cursor = sqliteConnection.cursor()
-    print("Successfully Connected to Database")
-
-    sqlite_insert_query = "INSERT INTO data_main(name1, name2, dice1, dice2, guess1, guess2, winner) VALUES ('"+name1+"','"+name2+"','"+str(dice1)+"','"+str(dice2)+"','"+str(guess1)+"','"+str(guess2)+"','"+winner+"');"
-
-    count = cursor.executescript(sqlite_insert_query)
-    sqliteConnection.commit()
-    print("Record inserted successfully into data_main table ", cursor.rowcount)
-    cursor.close()
-
-except sqlite3.Error as error:
-    print("Failed to insert data into sqlite table", error)
-finally:
-    if sqliteConnection:
-        sqliteConnection.close()
-        print("The SQLite connection is closed")       
+#birinci function bir db ismi alıp db yi bağlantı atıcak ve vursor döndürecek .
+#ikinci function bir cursor alıcak parametreleri alıcak ve insterleyecek.
+   
